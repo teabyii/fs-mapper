@@ -1,0 +1,31 @@
+{
+  "name": "fs-mapper",
+  "version": "0.1.0",
+  "description": "A simple tool to resolve files' path map configure.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com@jsenjoy:fs-mapper"
+  },
+  "keywords": [
+    "file",
+    "path",
+    "map",
+    "resolve"
+  ],
+  "author": "Boom Lee <teabyii@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "minimatch": "^3.0.2"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.12",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0"
+  }
+}
