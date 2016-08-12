@@ -13,7 +13,7 @@ Give a configure to modify path of the files matched.
 const mapper = require('fs-mapper')
 
 mapper.configure({
-  '*.js': 'js/[dirname]/[filename]',
+  '*.js': 'js/[dirname][filename]',
   'images/**/*.png': (dirname, filename) => `${dirname.replace(/images\//, '')}/${filename}`
 })
 
@@ -26,6 +26,8 @@ mapper([
 //   'images/icons/person.js': 'icons/person.png'
 // }
 ```
+
+> Notice: dirname includes the last `/` or `\`，like: `a/b.js` => `{ dirname: 'a/', filename: 'b.js' }`, but: `a.js` => `{ dirname: '', filename: 'a.js' }``
 
 ## License
 

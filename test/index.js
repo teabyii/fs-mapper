@@ -2,7 +2,7 @@ const assert = require('assert')
 const mapper = require('../')
 
 describe('Basic', () => {
-  it('string', () => {
+  it('map to string', () => {
     mapper.configure({
       '*.js': 'js/[filename]'
     })
@@ -14,7 +14,7 @@ describe('Basic', () => {
     assert.equal(result['a.js'], 'js/a.js')
   })
 
-  it('function', () => {
+  it('map to function', () => {
     mapper.configure({
       'style/*.css': (dirname, filename) => `css/${filename}`
     })
@@ -39,13 +39,19 @@ describe('Basic', () => {
     assert.equal(result['a.html'], 'html/a.html')
   })
 
-  it('require array', () => {
-    assert.throws(() => {
-      mapper('test')
-    }, (error) => {
-      if (error instanceof Error && /mapper required a array/.test(error)) {
-        return true
-      }
+  it('empty dirname', () => {
+    mapper.configure({
+      '*.png': 'images/[dirname][filename]'
     })
+
+    assert.equal(mapper('a.png'), 'images/a.png')
+  })
+
+  it('accept string', () => {
+    assert.equal(mapper('b.js'), 'b.js')
+  })
+
+  it('wrong param', () => {
+    assert.equal(mapper(1), false)
   })
 })

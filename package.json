@@ -1,6 +1,6 @@
 {
   "name": "fs-mapper",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A simple tool to resolve files' path map configure.",
   "main": "index.js",
   "scripts": {

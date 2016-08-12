@@ -15,7 +15,15 @@ function tweak(file) {
 
     if (minimatch(file, key)) {
       const filename = path.basename(file)
-      const dirname = path.dirname(file)
+      let dirname = path.dirname(file)
+
+      // For empty dirname.
+      if (dirname === '.') {
+        dirname = ''
+      } else {
+        dirname += path.sep
+      }
+
       const replacer = _config[key]
 
       if (typeof replacer === 'string') {
@@ -33,16 +41,19 @@ function tweak(file) {
   return result
 }
 
-function mapper(files) {
-  if (!Array.isArray(files)) {
-    throw new Error(`mapper required a array, but received ${typeof files}`)
+function mapper(target) {
+  if (Array.isArray(target)) {
+    return target.reduce((result, file) => {
+      result[file] = tweak(file)
+      return result
+    }, {})
   }
 
-  return files.reduce((result, file) => {
-    result[file] = tweak(file)
+  if (typeof target === 'string') {
+    return tweak(target)
+  }
 
-    return result
-  }, {})
+  return false
 }
 
 mapper.configure = function(config, reset) {
